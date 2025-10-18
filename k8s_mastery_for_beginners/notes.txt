@@ -1,0 +1,121 @@
+Download Rancher Desktop
+Needed to edit the ~/.kube/config to set "rancher-desktop" is current-context.
+kubctl completion isn't working on my setup... for some reason
+==> kubectl config use-context rancher-desktop
+https://kubernetes.io/docs/home
+https://kubernetes.io/docs/reference/kubectl/quick-reference/
+* * C-f,apiver  <-- find example code blocks
+less uses vim keybindings
+tumx enter "copy mode" is C-b,[ and then can use vim keybindings
+
+PODS
+"pod" smallest element of compute in a k8s cluster; comes from "pod of whales".
+Can think of a "pod" as a small VM.
+* * a group of containers and other resources
+* * the most _common_ pod is a single container pod, but others are possible:
+- Single Container
+- Multi Container
+- InitContainer (e.g. check connection to Postgres, or fail the start the pod)
+* * pod definition can contain information about Networking and Storage
+Control plane has the Scheduler, API Server, ETCD, et al.
+Something you write in k8s is a "manifest"
+`k run NAME --image=IMAGE --dry-run=client -o yaml` will output the YAML object
+apply a pod yaml:
+* k create -f nginx.yaml
+* k apply -f nginx.yaml   <-- apply the diff between file and cluster
+`k edit pod NAME`   <-- possible, but not recommended
+`k get pods -o wide`  <-- more information on the pods
+`k delete pod NAME`
+`k exec -it NAME -- /bin/bash`
+
+DEPLOYMENTS
+can use deploy, deployment, or deployments
+`k create deployment -h`
+`k create deployment NAME --image=httpd --replicas=3`
+`k get deployments`
+`k edit deployment NAME`
+`k describe deployment NAME`  <-- look in "Events:" for debugging info
+`k apply -f deploy.yaml`
+`k get replicaset`  <-- let k8s manage replica sets for you; define requirements in deployment manifest
+`watch -n 1 kubectl get pods`  <-- run command every 1 sec (not on iOS)
+
+NAMESPACES
+"namespace" is a mechanism for isolating groups of resources within a single cluster
+can use namespace, namespaces, ns
+`k get namespaces`
+`k create namespace NAME`
+`k delete ns NAME`  <-- deletes all resources too!!!
+`k run PNAME --image=nginx --namespace=NS-NAME`
+`k config set-context --current --namespace=mealie` use "mealie" instead of "default"
+
+PORT FORWARDING
+`k port-forward pod/PNAME <port|local-port:pod-port>`
+`k port-forward services/SVC-NAME PORT`
+
+NETWORKING
+Can use "service", "svc"
+All containers in the same pod use localhost.
+By default, each pod can reach all other pods.
+Network Policies can control which pods can reach which other pods.
+CNI Plugin (Container Networking Interface)
+* * Provides network connectivity to containers
+* * Configures network interfaces to containers
+* * Assigns IP Addresses and sets up routes ; IPTables on nodes
+* * Implemented by CNI plugins : Cilium, Calico, Flannel
+`rdctl shell bash` <-- run a BASH shell on the Rancher Desktop ConTroL
+A "service" offers a consistent address to access a set of pods.
+* * Pods are ephemeral. Don't expect them to have a long lifespan.
+* * Pods are constantly changing and being moved accross nodes.
+* * How will the system keep track of the constantly changing IP addresses.
+`k expose deployment frontend --port=8080`
+* * ClusterIP service : Default creates a cluster wide IP for the service
+* * Node Port service : Expose a port on each node, allowing direct access to the service through any node's IP address
+* * LoadBalancer service : Used for cloud providers. Will create an Azure LoadBalencer to route traffic into the cluster. Can also be used in k3s/Rancher Desktop.
+The service has a cluster-wide DNS name: SVC-NAME.NAMESPACE.svc.cluster.local
+
+INGRESS
+Ingress exposes HTTP and HTTPS routes (DNS names) from outside the cluster to services within the cluster.
+Features:
+* * SSL/TLS termination
+* * External URLs
+* * Path based routing
+Ingress Controller
+* * NGINX
+* * Traefik
+* * Cilium
+* * Cloud : AGIC (Application Gateway Ingress Controller)
+
+STORAGE
+
+O starting on section 17
+
+
+
+VIM commands
+During search next is "n" prev is "N"
+Page up C-u
+Page down C-d
+:set paste <-- insert copy/paste that preserves the indents from buffer
+dgg  <--- delete from point to top of file
+V  <-- select entire line
+<  <-- reduse indent of selected line
+>  <-- increase indent of selected line
+v  <-- visual mode
+* * w  <-- next word
+* * x  <-- delete highlighted
+:%s/foo/bar/g  <-- operate on the entire buffer, substitute "foo" with "bar", all instances
+
+
+
+TMUX commands
+C-B," spilt window vertically
+C-B,o move to other window
+C-B,c create a new window
+C-B,1 move to window #1
+C-B,2 move to window #2
+C-B,n move to next window
+C-D   close the current window
+
+
+RECIPES
+https://www.bbcgoodfood.com/recipes/marathon-burritos
