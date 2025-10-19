@@ -86,8 +86,18 @@ Ingress Controller
 * * Cloud : AGIC (Application Gateway Ingress Controller)
 
 STORAGE
+Can use "persistentvolumeclaim" or "pvc"
+Can use "persistentvolume" or "pv"
+"volume" portions of storage that are mounted into a container
+There is ephemeral storage (`emptyDir`) and persistent storage
+There are "persistent volumes" and "persistent volume _claims_"
+* * claim is a claim a piece out of a larger disk (claim with a flag)
+* * most common is to make a claim and allow control plane to allocate the volume (dynamic allocation)
+`k get storageclass`
+"Storage class" can be specified change off default; depends on your hosting environment; search k8s.io documentation
 
-O starting on section 17
+
+
 
 
 
@@ -109,12 +119,14 @@ v  <-- visual mode
 
 TMUX commands
 C-B," spilt window vertically
+C-B,% spilt window horizontally
 C-B,o move to other window
-C-B,c create a new window
-C-B,1 move to window #1
-C-B,2 move to window #2
-C-B,n move to next window
-C-D   close the current window
+C-B,c create a new buffer
+C-B,1 move to buffer #1
+C-B,2 move to buffer #2
+C-B,n move to next buffer
+C-D   close the current buffer/window
+C-L   clear the current buffer
 
 
 RECIPES
