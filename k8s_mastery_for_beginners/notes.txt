@@ -96,6 +96,15 @@ There are "persistent volumes" and "persistent volume _claims_"
 `k get storageclass`
 "Storage class" can be specified change off default; depends on your hosting environment; search k8s.io documentation
 
+K9S
+A text based UI for managing k8s cluster
+A <-- sort by age of the pods
+S <-- sort by status of the pods
+d <-- describe
+e <-- edit
+l <-- logs
+s <-- shell
+y <-- yaml
 
 
 
