@@ -106,6 +106,22 @@ l <-- logs
 s <-- shell
 y <-- yaml
 
+HELM
+The package manager for k8s
+`helm repo add homarr-labs https://homarr-labs.github.io/charts/`
+`helm repo update`
+`helm install homarr homarr-labs/homarr --namespace=homarr --create-namespace`
+`helm unintsall homarr` <-- completely wipes from system
+`helm ls -A` <-- all namespaces
+`helm ls -n NAME` <-- one namespace
+`kubectl create secret generic db-encryption \
+--from-literal=db-encryption-key='<SECRET_ENCRYPTION_KEY_SECRET_TO_CHANGE>' \
+--namespace homarr`
+kubectl create secret generic db-encryption \
+--from-literal=db-encryption-key='b11872caed884871a7970ab472792ea7b11872caed884871a7970ab472792ea7' \
+--namespace homarr
+`helm upgrade -n homarr homarr homarr-labs/homarr --values=values.yaml`
+`helm show values homarr-labs/homarr | less` (or `| vim -`)
 
 
 
