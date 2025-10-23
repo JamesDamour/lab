@@ -123,6 +123,18 @@ kubectl create secret generic db-encryption \
 `helm upgrade -n homarr homarr homarr-labs/homarr --values=values.yaml`
 `helm show values homarr-labs/homarr | less` (or `| vim -`)
 
+MONITORING
+`helm install  kube-prometheus-stack-78.4.0 oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack`
+`helm repo add prometheus-community https://prometheus-community.github.io/helm-charts`
+`helm repo update`
+`helm install prometheus-stack prometheus-community/kube-prometheus-stack --namespace=monitoring --create-namespace`
+Metric is a number to assess the performance or the status of a process.
+Time series is a metric with a timestamp to observe evolution of the metric over time.
+An "operator" is something that enables custom resource definitionss on a k8s cluster.
+`helm upgrade -n monitoring prometheus-stack prometheus-community/kube-prometheus-stack --values=values.yaml`
+`k apply -f loadbalancer.yaml`
+
+o Outro section 23
 
 
 
@@ -139,7 +151,9 @@ v  <-- visual mode
 * * w  <-- next word
 * * x  <-- delete highlighted
 :%s/foo/bar/g  <-- operate on the entire buffer, substitute "foo" with "bar", all instances
-
+`vim -O file1 file2`  <--- opens both and splits window vertically
+* * C-w,l <-- move to right
+* * C-w,h <-- move to left
 
 
 TMUX commands
