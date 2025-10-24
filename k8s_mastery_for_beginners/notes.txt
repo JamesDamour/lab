@@ -134,8 +134,31 @@ An "operator" is something that enables custom resource definitionss on a k8s cl
 `helm upgrade -n monitoring prometheus-stack prometheus-community/kube-prometheus-stack --values=values.yaml`
 `k apply -f loadbalancer.yaml`
 
-o Outro section 23
 
+OUTRO
+Take CKA (Certified K8s Admininstrator) or CKAD (Certified K8s Application Developer) certification
+* * CKA With Practice Tests by Mumshad Mannambeth : 23 hours
+* * CKAD With Practice Tests by Mumshad Mannambeth : 15 hours
+Find other self-hosted applications that use Docker Compose to deploy
+* * convert to using k8s manifests
+Maybe try some helm charts
+* * Linkding
+* * Homepage
+* * techno-tim/littlelink-server
+It's about learning and practice, not about doing something useful
+Lean about Ingress manifests; configure a SSL cert
+* * ingressClass of "traefik"
+* * expose Mealie
+Other courses
+* * GitOps <-- deploy from GitHub workflows
+* * Certificate managment with cert-manager
+* * Databases
+* * On-prem with k3s and Talos
+skool.com/kubecraft
+* * Hands on portfolio (running in your home lab)
+* * Master your LinkedIn profile
+* * Master your personal brand and CV
+* * How to get the job
 
 
 VIM commands
